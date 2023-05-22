@@ -28,7 +28,7 @@ async def comlist(message: types.Message):
     kb = [
         [
             types.KeyboardButton(text='Старт'),
-            types.KeyboardButton(text='Ввести группу')
+            types.KeyboardButton(text='Выберите группу')
         ],
     ]
     keyboard = types.ReplyKeyboardMarkup(
@@ -50,6 +50,20 @@ async def help(message: types.Message):
         resize_keyboard=True,
     )
     await message.answer('Ознакомьтесь с командами:', reply_markup=keyboard)
+
+@dp.message_handler(text='Старт') #Команда Start
+async def start(message: types.Message):
+    kb = [
+        [
+            types.KeyboardButton(text='Что умеет этот бот?'),
+            types.KeyboardButton(text='Выберите группу')
+        ],
+    ]
+    keyboard = types.ReplyKeyboardMarkup(
+        keyboard = kb,
+        resize_keyboard=True,
+    )
+    await message.answer('Привет!\nЭто бот, который поможет Вам узнать расписание на любой день.\n', reply_markup=keyboard)
 
 @dp.message_handler()
 async def unknownWord(message: types.Message):
