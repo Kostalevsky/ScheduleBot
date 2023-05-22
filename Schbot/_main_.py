@@ -1,23 +1,55 @@
+from distutils.command.config import config
 import logging
+from typing import Text
+from aiogram import Bot, Dispatcher, executor, types, utils, filters
+from botconfig import TOKEN
 
-from aiogram import Bot, Dispatcher, executor, types
-
-API_TOKEN = '6250705325:AAEzbtEXHMAWRUnRoOjyntEnQXxS6uE4TPA'
-
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Initialize bot and dispatcher
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start']) #Команда Start
-async def hello(message: types.Message):
-    await message.reply('Привет!\nЭто бот, который поможет Вам узнать расписание на любой день.\n')
+async def start(message: types.Message):
+    kb = [
+        [
+            types.KeyboardButton(text='Что умеет этот бот?'),
+            types.KeyboardButton(text='Выберите группу')
+        ],
+    ]
+    keyboard = types.ReplyKeyboardMarkup(
+        keyboard = kb,
+        resize_keyboard=True,
+    )
+    await message.answer('Привет!\nЭто бот, который поможет Вам узнать расписание на любой день.\n', reply_markup=keyboard)
+
+@dp.message_handler(text='Что умеет этот бот?')
+async def comlist(message: types.Message):
+    kb = [
+        [
+            types.KeyboardButton(text='Старт'),
+            types.KeyboardButton(text='Ввести группу')
+        ],
+    ]
+    keyboard = types.ReplyKeyboardMarkup(
+        keyboard=kb,
+        resize_keyboard=True,
+    )
+    await message.answer('Ознакомьтесь с командами:', reply_markup=keyboard)
 
 @dp.message_handler(commands=['help']) #Команда Help
 async def help(message: types.Message):
-    await message.reply('тестовая команда')
+    kb = [
+        [
+            types.KeyboardButton(text='Старт'),
+            types.KeyboardButton(text='Ввести группу')
+        ],
+    ]
+    keyboard = types.ReplyKeyboardMarkup(
+        keyboard=kb,
+        resize_keyboard=True,
+    )
+    await message.answer('Ознакомьтесь с командами:', reply_markup=keyboard)
 
 @dp.message_handler()
 async def unknownWord(message: types.Message):

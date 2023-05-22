@@ -2,9 +2,9 @@
 *.pyc
 __pycache__/
 
-# Logs and databases
-*.log
-*.sqlite3
+# # Logs and databases
+# *.log
+# *.sqlite3
 
 # Local development settings
 .env
