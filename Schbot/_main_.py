@@ -71,3 +71,8 @@ async def unknownWord(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+
+
+
+# #To-Do list:
+# написать инлайн кнопки, попробовать разбить на разные файлы
