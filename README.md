@@ -1,1 +1,1 @@
-# ScheduleBot
+Schedule bot for MPGU
